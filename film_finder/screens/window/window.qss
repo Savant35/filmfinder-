@@ -1,0 +1,67 @@
+/*window settings                               */
+Window {
+  background-color:#E0E2F2;
+}
+
+/*header settings                               */
+Header QPushButton{
+  border: none;
+  background-color:none;
+  color: #A8A1AF;
+  font-size: 14px;
+}
+
+#logoButton {
+  color: red;
+  font-size: 18px;
+}
+
+/*sidebar settings                               */
+Sidebar {
+  border: 4px solid #f0f3fd;
+  border-radius: 10px;
+  background-color: #f0f3fd;
+}
+
+
+/*frame settings                               */
+Banner {
+  border: 4px solid;
+  border-radius: 10px;
+}
+
+#frontFrame QLabel{
+  font-size: 30px;
+  color:#E0E2F2;
+}
+
+#frontFrame QPushButton{
+  font-size: 20px;
+  background-color:#f13e44;
+  color:#E0E2F2;
+  border-radius: 4px;
+}
+
+/*view settings                               */
+AutoFitView{
+  background-color: transparent;
+  border: 2px solid;
+  border-color: transparent;
+  color: #0F0C0D;
+}
+
+AutoFitView::item {
+  border: 4px solid white;
+  background-color: white;
+  outline: none;
+  border-radius: 10px;
+}
+/*row settings                               */
+Row QPushButton{
+  border: none;
+  background-color: none;
+}
+Row QLabel {
+  color: #0F0C0D;
+  font-size: 14px;
+}

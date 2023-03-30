@@ -1,0 +1,1 @@
+from .scaledpixmaplabel import ScaledPixmapLabel
