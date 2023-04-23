@@ -9,7 +9,7 @@ from PyQt6.QtNetwork import QNetworkAccessManager, QNetworkReply, QNetworkReques
 
 class TMDBTVListModel(QAbstractListModel):
 
-    def __init__(self,category = "top rated", parent=None,):
+    def __init__(self,category = "popular", parent=None,):
         super().__init__(parent)
         self.placeHolderPixmap: QPixmap = QPixmap(600,int(600 * 1.5))
         self.placeHolderPixmap.fill(QColor("#7c859E"))
@@ -82,8 +82,8 @@ class TMDBTVListModel(QAbstractListModel):
         currentPage = 0
         if len(self.media ) > 0:
             currentPage = int(self.tv.page)
-        if self.category == "top rated":
-            response = self.tv.top_rated(currentPage + 1)
+        if self.category == "popular":
+            response = self.tv.popular(currentPage + 1)
             first = self.rowCount()
             last  = first
             if isinstance(response,list):
