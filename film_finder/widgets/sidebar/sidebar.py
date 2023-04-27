@@ -2,7 +2,7 @@
 from typing import Optional
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QFrame, QSizePolicy, QVBoxLayout, QWidget
-
+from film_finder.tmdb.tmdbmovielistmodel import TMDBMovieListModel
 from ..row import Row
 from ..autofitview import AutoFitView
 from film_finder.tmdb import TMDBListModel
@@ -13,36 +13,36 @@ class Sidebar(QFrame):
         super().__init__(parent=parent)
 
 
-        episodeTmdbModel: TMDBListModel = TMDBListModel()
-        episodeView: AutoFitView = AutoFitView()
-        episodeView.setWrapping(False)
-        episodeView.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff) 
-        episodeView.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff) 
-        episodeView.setModel(episodeTmdbModel)
-        episodeView.setMinimumIconSize(140,int(140 * 1.5))
-        episodeRow: Row = Row("New episodes", episodeView)
+        popularTmdbModel = TMDBMovieListModel("popular","popular")
+        popularView: AutoFitView = AutoFitView()
+        popularView.setWrapping(False)
+        popularView.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff) 
+        popularView.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff) 
+        popularView.setModel(popularTmdbModel)
+        popularView.setMinimumIconSize(140,int(140 * 1.5))
+        popularRow: Row = Row("Popular Movies", popularView)
 
-        continueWatchingTmdbModel: TMDBListModel = TMDBListModel()
-        continueWatchingView: AutoFitView = AutoFitView()
-        continueWatchingView.setWrapping(False)
-        continueWatchingView.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff) 
-        continueWatchingView.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff) 
-        continueWatchingView.setModel(continueWatchingTmdbModel)
-        continueWatchingView.setMinimumIconSize(140,int(140 * 1.5))
-        continueWatchingRow: Row = Row("Continue watching", continueWatchingView)
+        tmdbmodel2 = TMDBMovieListModel("top_rated","top_rated")
+        topratedView: AutoFitView = AutoFitView()
+        topratedView.setWrapping(False)
+        topratedView.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff) 
+        topratedView.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff) 
+        topratedView.setModel(tmdbmodel2)
+        topratedView.setMinimumIconSize(140,int(140 * 1.5))
+        topratedRow: Row = Row("Top Rated Movies", topratedView)
 
-        friendsWatchingTmdbModel: TMDBListModel = TMDBListModel()
-        friendsWatchingView: AutoFitView = AutoFitView()
-        friendsWatchingView.setWrapping(False)
-        friendsWatchingView.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff) 
-        friendsWatchingView.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff) 
-        friendsWatchingView.setModel(friendsWatchingTmdbModel)
-        friendsWatchingView.setMinimumIconSize(140,int(140 * 1.5))
-        friendsWatchingRow: Row = Row("Friends watching", friendsWatchingView)
+        tmdbmodel3 = TMDBMovieListModel("now_playing","now_playing")
+        nowplayingView: AutoFitView = AutoFitView()
+        nowplayingView.setWrapping(False)
+        nowplayingView.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff) 
+        nowplayingView.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff) 
+        nowplayingView.setModel(tmdbmodel3)
+        nowplayingView.setMinimumIconSize(140,int(140 * 1.5))
+        nowplayingRow: Row = Row("Movies In Theter", nowplayingView)
 
         sidebarLayout: QVBoxLayout = QVBoxLayout(self)
-        sidebarLayout.addWidget(episodeRow)
-        sidebarLayout.addWidget(continueWatchingRow)
-        sidebarLayout.addWidget(friendsWatchingRow)
+        sidebarLayout.addWidget(popularRow)
+        sidebarLayout.addWidget(topratedRow)
+        sidebarLayout.addWidget(nowplayingRow)
 
         self.setSizePolicy(QSizePolicy.Policy.Expanding,QSizePolicy.Policy.Expanding)
