@@ -35,12 +35,14 @@ class TMDBTVListModel(QAbstractListModel):
         if role == Qt.ItemDataRole.DecorationRole:
             media = self.media[row]
             if hasattr(media,"poster_pixmap"):
-                return media.get("poster_pixmap")
+                return QIcon(media.get("poster_pixmap"))
             else:
                 poster_path = media.get("poster_path")
                 url = self.baseImageUrl 
                 if isinstance(poster_path,str):
                     url +=poster_path
+                    if row == 2:
+                        print(url)
                 request = QNetworkRequest(QUrl(url))
                 reply = self.networkmanager.get(request)
                 reply.setProperty("row",row)

@@ -12,6 +12,7 @@ class Home(QFrame):
         super().__init__(parent=parent)
 
         banner: Banner = Banner()
+        
         tmdbModel: QAbstractListModel = TMDBTVListModel()
         view: AutoFitView = AutoFitView()
         view.setWrapping(False)
@@ -23,7 +24,7 @@ class Home(QFrame):
 
         homeLayout: QVBoxLayout = QVBoxLayout(self)
         homeLayout.addWidget(banner,6)
-        homeLayout.addWidget(row,4)
+        homeLayout.addWidget(row)
         homeLayout.setContentsMargins(0,0,0,0)
         homeLayout.setSpacing(20)
 

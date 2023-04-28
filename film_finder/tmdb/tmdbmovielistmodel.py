@@ -33,11 +33,11 @@ class TMDBMovieListModel(QAbstractListModel):
         if row < 0 or row >= self.rowCount():
             return None
         if role == Qt.ItemDataRole.DisplayRole:
-            return self.media[row].get("name")
+            return self.media[row].get("title")
         if role == Qt.ItemDataRole.DecorationRole:
             media = self.media[row]
             if hasattr(media,"poster_pixmap"):
-                return media.get("poster_pixmap")
+                return QIcon(media.get("poster_pixmap"))
             else:
                 poster_path = media.get("poster_path")
                 url = self.baseImageUrl 

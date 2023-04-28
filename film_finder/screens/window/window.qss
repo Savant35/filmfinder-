@@ -55,6 +55,7 @@ AutoFitView::item {
   background-color: white;
   outline: none;
   border-radius: 10px;
+  color:black;
 }
 /*row settings                               */
 Row QPushButton{

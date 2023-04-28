@@ -1,5 +1,5 @@
 from typing import Optional
-from PyQt6.QtCore import  QEasingCurve, QEvent, QPropertyAnimation, QSize
+from PyQt6.QtCore import  QEasingCurve, QEvent, QPropertyAnimation, QSize, Qt
 from PyQt6.QtWidgets import  QListView, QWidget, QAbstractScrollArea
 
 class AutoFitView(QListView):
@@ -9,7 +9,7 @@ class AutoFitView(QListView):
 
 
         self.iconSizeRatio: float = 1.5
-        self.minimumIconSize: QSize = QSize(150,int(150 * 1.5))
+        self.minimumIconSize: QSize = QSize(120,int(120 * 1.5))
         self.animation: QPropertyAnimation = QPropertyAnimation(self.horizontalScrollBar(), b"value") #pyright: ignore
         self.animation.setDuration(300)
         #self.animation.setEasingCurve(QEasingCurve.OutQuad) #pyright: ignore
@@ -21,6 +21,7 @@ class AutoFitView(QListView):
         self.setUniformItemSizes(True)
         self.setIconSize(self.minimumIconSize)
         self.setSpacing(5)
+        self.setTextElideMode(Qt.TextElideMode.ElideLeft)
         self.setContentsMargins(0,0,0,0)
         self.setWordWrap(True)
         self.viewport().installEventFilter(self)
@@ -46,7 +47,6 @@ class AutoFitView(QListView):
 
     def minimumSizeHint(self) -> QSize:
             return self.sizeHint()
-
     def scrollRight(self):
         currentPos = self.horizontalScrollBar().value()
         pageSize = self.horizontalScrollBar().pageStep()
