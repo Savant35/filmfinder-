@@ -1,2 +1,2 @@
 from .window import Window
-from .home import Home
+from .home import HomeScreen

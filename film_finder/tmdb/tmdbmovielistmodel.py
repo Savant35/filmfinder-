@@ -1,4 +1,3 @@
-from pickle import TUPLE
 from typing import Any, List, Tuple
 from PyQt6.QtCore import QAbstractListModel, QModelIndex, QUrl, Qt
 from PyQt6.QtGui import QColor, QIcon, QPixmap
@@ -9,17 +8,15 @@ from PyQt6.QtNetwork import QNetworkAccessManager, QNetworkReply, QNetworkReques
 
 class TMDBMovieListModel(QAbstractListModel):
 
-    def __init__(self,category: str, endpoint: str, parent=None,):
+    def __init__(self,endpoint: str, parent=None,):
         super().__init__(parent)
         self.placeHolderPixmap: QPixmap = QPixmap(600,int(600 * 1.5))
         self.placeHolderPixmap.fill(QColor("#7c859E"))
         self.baseImageUrl = "https://www.themoviedb.org/t/p/w185"
-        self.category = category
         #self.placeHolderPixmap: QPixmap = QPixmap("film_finder/tmdb/assets/queengambitposter.jpg")
         self.media: List[AsObj] = []
         self.movie = Movie()
         self.networkmanager = QNetworkAccessManager()
-        self.genre = category
         self.endpoint = endpoint
 
     def rowCount(self, parent=QModelIndex()) -> int:
@@ -57,6 +54,7 @@ class TMDBMovieListModel(QAbstractListModel):
         return self.createIndex(row, column)
 
     def canFetchMore(self, parent: QModelIndex) -> bool:
+        return False
         if len(self.media ) > 0:
             currentPage = self.movie.page
             totalPages: str = self.movie.total_pages
@@ -84,7 +82,6 @@ class TMDBMovieListModel(QAbstractListModel):
         currentPage = 0
         if len(self.media ) > 0:
             currentPage = int(self.movie.page)
-        if self.category == self.category:
             response = getattr(self.movie, self.endpoint)(currentPage + 1)
             first = self.rowCount()
             last  = first
@@ -102,4 +99,3 @@ class TMDBMovieListModel(QAbstractListModel):
         self.beginResetModel()
         self.media.clear()
         self.endResetModel()
-

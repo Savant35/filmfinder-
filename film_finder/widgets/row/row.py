@@ -5,7 +5,6 @@ from PyQt6.QtGui import QIcon
 from PyQt6.QtWidgets import QFrame, QHBoxLayout, QLabel, QPushButton, QSizePolicy, QVBoxLayout, QWidget
 from ..autofitview import AutoFitView
 
-
 class Row(QFrame):
 
     def __init__(self,title: str,view: AutoFitView,parent: Optional[QWidget] = None):

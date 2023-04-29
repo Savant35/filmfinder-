@@ -1,11 +1,9 @@
 from typing import Optional
-from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import  QFrame, QGridLayout,  QMainWindow, QStackedLayout, QWidget
-from tmdbv3api import Movie
+from PyQt6.QtWidgets import  QAbstractButton, QFrame, QGridLayout,  QMainWindow, QStackedWidget, QWidget
 from film_finder.widgets import Header
 from film_finder.widgets import Sidebar
-from ..home import Home
-
+from ..home import HomeScreen
+from ..movie import MovieScreen
 
 class Window(QMainWindow):
 
@@ -13,40 +11,38 @@ class Window(QMainWindow):
         super().__init__(parent=parent)
 
         header: Header = Header()
-        sidebar: Sidebar = Sidebar()
-        home: Home = Home()
-        movie = Movie()
+        home: HomeScreen = HomeScreen()
+        movie = MovieScreen()
 
-
-
-        mainFrame: QFrame = QFrame()
+        self.mainStackWidget: QStackedWidget = QStackedWidget()
         windowFrame: QFrame = QFrame()
 
-        header.moviesButton.clicked.connect(self.loadHome)
+        #header.moviesButton.clicked.connect(self.loadHome)
+        header.navButtonClicked.connect(self.onNavButtonclick)
 
         windowFrameLayout: QGridLayout = QGridLayout(windowFrame)
         windowFrameLayout.addWidget(header,0,0,1,1)
-        windowFrameLayout.addWidget(home,1,0,1,1,)
-        windowFrameLayout.addWidget(sidebar,0,1,-1,1)
-        windowFrameLayout.setColumnStretch(0,6)
-        windowFrameLayout.setColumnStretch(1,5)
+        windowFrameLayout.addWidget(self.mainStackWidget,1,0,1,1)
         windowFrameLayout.setSpacing(30)
 
-        self.mainFrameLayout = QStackedLayout()
-        self.mainFrameLayout.addWidget(windowFrame)
-        #self.mainFrameLayout.addWidget()
-        #self.mainFrameLayout.addWidget(series)
-        self.mainFrameLayout.setCurrentIndex(0)
-        mainFrame.setLayout(self.mainFrameLayout)
+        self.mainStackWidget.addWidget(home)
+        self.mainStackWidget.addWidget(movie)
+        self.mainStackWidget.setCurrentIndex(0)
 
 
-        self.setCentralWidget(mainFrame)
+        self.setCentralWidget(windowFrame)
         self.setContentsMargins(10,10,10,10)
         self.loadStylesheet()
         self.setWindowTitle("Filmfinder+")
 
+    def onNavButtonclick(self,button: QAbstractButton):
+        if button.text().lower() == "home":
+            self.mainStackWidget.setCurrentIndex(0)
+        elif button.text().lower() == "movies":
+            self.mainStackWidget.setCurrentIndex(1)
+        
     def loadHome(self):
-        self.mainFrameLayout.setCurrentIndex(1)
+        self.mainStackWidget.setCurrentIndex(0)
 
     def loadStylesheet(self):
         with open("film_finder/screens/window/window.qss","r") as f:

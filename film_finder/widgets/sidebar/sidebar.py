@@ -13,16 +13,16 @@ class Sidebar(QFrame):
         super().__init__(parent=parent)
 
 
-        popularTmdbModel = TMDBMovieListModel("popular","popular")
+        popularTmdbModel = TMDBMovieListModel("popular")
         popularView: AutoFitView = AutoFitView()
         popularView.setWrapping(False)
         popularView.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff) 
         popularView.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff) 
-        popularView.setModel(popularTmdbModel)
+        #popularView.setModel(popularTmdbModel)
         #popularView.setMinimumIconSize(140,int(140 * 1.5))
         popularRow: Row = Row("Popular Movies", popularView)
 
-        tmdbmodel2 = TMDBMovieListModel("top_rated","top_rated")
+        tmdbmodel2 = TMDBMovieListModel("top_rated")
         topratedView: AutoFitView = AutoFitView()
         topratedView.setWrapping(False)
         topratedView.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff) 
@@ -31,7 +31,7 @@ class Sidebar(QFrame):
         #topratedView.setMinimumIconSize(140,int(140 * 1.5))
         topratedRow: Row = Row("Top Rated Movies", topratedView)
 
-        tmdbmodel3 = TMDBMovieListModel("now_playing","now_playing")
+        tmdbmodel3 = TMDBMovieListModel("now_playing")
         nowplayingView: AutoFitView = AutoFitView()
         nowplayingView.setWrapping(False)
         nowplayingView.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff) 
@@ -41,8 +41,8 @@ class Sidebar(QFrame):
         nowplayingRow: Row = Row("Movies In Theter", nowplayingView)
 
         sidebarLayout: QVBoxLayout = QVBoxLayout(self)
-        sidebarLayout.addWidget(popularRow)
         sidebarLayout.addWidget(topratedRow)
+        sidebarLayout.addWidget(popularRow)
         sidebarLayout.addWidget(nowplayingRow)
-
+        
         #self.setSizePolicy(QSizePolicy.Policy.Expanding,QSizePolicy.Policy.Expanding)
