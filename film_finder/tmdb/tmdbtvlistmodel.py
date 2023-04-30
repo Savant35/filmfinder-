@@ -59,7 +59,7 @@ class TMDBTVListModel(QAbstractListModel):
         return self.createIndex(row, column)
 
     def canFetchMore(self, parent: QModelIndex) -> bool:
-        return False
+        #return False
         if len(self.media ) > 0:
             currentPage = self.tv.page
             totalPages: str = self.tv.total_pages

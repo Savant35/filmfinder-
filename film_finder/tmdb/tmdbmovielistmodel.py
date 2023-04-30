@@ -54,7 +54,7 @@ class TMDBMovieListModel(QAbstractListModel):
         return self.createIndex(row, column)
 
     def canFetchMore(self, parent: QModelIndex) -> bool:
-        return False
+        #return False
         if len(self.media ) > 0:
             currentPage = self.movie.page
             totalPages: str = self.movie.total_pages
@@ -82,18 +82,18 @@ class TMDBMovieListModel(QAbstractListModel):
         currentPage = 0
         if len(self.media ) > 0:
             currentPage = int(self.movie.page)
-            response = getattr(self.movie, self.endpoint)(currentPage + 1)
-            first = self.rowCount()
-            last  = first
-            if isinstance(response,list):
-                last = len(response) -1 + first
-                self.beginInsertRows(parent,first,last)
-                self.media.extend(response)
-                self.endInsertRows()
-            else:
-                self.beginInsertRows(parent,first,last)
-                self.media.append(response)
-                self.endInsertRows()
+        response = getattr(self.movie, self.endpoint)(currentPage + 1)
+        first = self.rowCount()
+        last  = first
+        if isinstance(response,list):
+            last = len(response) -1 + first
+            self.beginInsertRows(parent,first,last)
+            self.media.extend(response)
+            self.endInsertRows()
+        else:
+            self.beginInsertRows(parent,first,last)
+            self.media.append(response)
+            self.endInsertRows()
 
     def clear(self):
         self.beginResetModel()

@@ -35,6 +35,15 @@ class TVScreen(QFrame):
         actionView.setModel(tmdbmodel)
         #popularView.setMinimumIconSize(140,int(140 * 1.5))
         actionRow: Row = Row("Action and Adventure", actionView)
+ 
+        tmdbmodel = TMDBDiscoverListModel("discover_tv_shows",16)
+        animationView: AutoFitView = AutoFitView()
+        animationView.setWrapping(False)
+        animationView.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        animationView.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        animationView.setModel(tmdbmodel)
+        #popularView.setMinimumIconSize(140,int(140 * 1.5))
+        animationRow: Row = Row("Animation", animationView)
 
         tmdbmodel2 = TMDBDiscoverListModel("discover_tv_shows",35)
         comedyView: AutoFitView = AutoFitView()
@@ -45,7 +54,7 @@ class TVScreen(QFrame):
         #popularView.setMinimumIconSize(140,int(140 * 1.5))
         comedyRow: Row = Row("comedy", comedyView)
 
-        tmdbmodel3 = TMDBDiscoverListModel("discover_tv_shows",10767)
+        tmdbmodel3 = TMDBDiscoverListModel("discover_tv_shows",10765)
         fantasyView: AutoFitView = AutoFitView()
         fantasyView.setWrapping(False)
         fantasyView.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
@@ -64,7 +73,7 @@ class TVScreen(QFrame):
         dramaRow= Row("Drama",dramaView)
 
 
-        tmdbmodel5 = TMDBDiscoverListModel("discover_tv_shows",27)
+        tmdbmodel5 = TMDBDiscoverListModel("discover_tv_shows",10764)
         realityView: AutoFitView = AutoFitView()
         realityView.setWrapping(False)
         realityView.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
@@ -78,6 +87,7 @@ class TVScreen(QFrame):
         scrollAreaFrameLayout.addWidget(banner)
         scrollAreaFrameLayout.addWidget(actionRow)
         scrollAreaFrameLayout.addWidget(comedyRow)
+        scrollAreaFrameLayout.addWidget(animationRow)
         scrollAreaFrameLayout.addWidget(fantasyRow)
         scrollAreaFrameLayout.addWidget(dramaRow)
         #scrollAreaFrameLayout.addWidget(realityRow)

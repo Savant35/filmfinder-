@@ -18,7 +18,7 @@ class Sidebar(QFrame):
         popularView.setWrapping(False)
         popularView.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff) 
         popularView.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff) 
-        #popularView.setModel(popularTmdbModel)
+        popularView.setModel(popularTmdbModel)
         #popularView.setMinimumIconSize(140,int(140 * 1.5))
         popularRow: Row = Row("Popular Movies", popularView)
 

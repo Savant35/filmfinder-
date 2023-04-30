@@ -75,9 +75,9 @@ class MovieScreen(QFrame):
 
         scrollFrameLayout = QVBoxLayout(scrollFrame)
         scrollFrameLayout.addWidget(banner)
-        #movieLayout.addWidget(actionRow)
+        scrollFrameLayout.addWidget(actionRow)
         scrollFrameLayout.addWidget(comedyRow)
-        #movieLayout.addWidget(fantasyRow)
+        scrollFrameLayout.addWidget(fantasyRow)
         scrollFrameLayout.addWidget(adventureRow)
         scrollFrameLayout.addWidget(horrorRow)
 
