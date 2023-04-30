@@ -31,7 +31,10 @@ class TMDBDiscoverListModel(QAbstractListModel):
         if row < 0 or row >= self.rowCount():
             return None
         if role == Qt.ItemDataRole.DisplayRole:
-            return self.media[row].get("title")
+            if hasattr(self.media[row],"name"):
+                return self.media[row].get("name")
+            else:
+                return self.media[row].get("title")
         if role == Qt.ItemDataRole.DecorationRole:
             media = self.media[row]
             if hasattr(media,"poster_pixmap"):

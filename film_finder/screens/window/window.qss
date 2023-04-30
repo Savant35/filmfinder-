@@ -66,3 +66,7 @@ Row QLabel {
   color: #0F0C0D;
   font-size: 14px;
 }
+QScrollArea,#scrollFrame{
+  background-color:#E0E2F2;
+  border: none;
+}

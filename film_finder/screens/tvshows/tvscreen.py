@@ -11,7 +11,7 @@ from film_finder.widgets.row.row import Row
 
 
 
-class MovieScreen(QFrame): 
+class TVScreen(QFrame): 
     def __init__(self,parent: Optional [QWidget] = None):
         super().__init__(parent=parent)
 
@@ -25,18 +25,18 @@ class MovieScreen(QFrame):
         scrollArea.setWidgetResizable(True)
         scrollFrame.setObjectName("scrollFrame")
 
-
+    
         
-        tmdbmodel = TMDBDiscoverListModel("discover_movies",18)
+        tmdbmodel = TMDBDiscoverListModel("discover_tv_shows",10759)
         actionView: AutoFitView = AutoFitView()
         actionView.setWrapping(False)
         actionView.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         actionView.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         actionView.setModel(tmdbmodel)
         #popularView.setMinimumIconSize(140,int(140 * 1.5))
-        actionRow: Row = Row("Action", actionView)
+        actionRow: Row = Row("Action and Adventure", actionView)
 
-        tmdbmodel2 = TMDBDiscoverListModel("discover_movies",35)
+        tmdbmodel2 = TMDBDiscoverListModel("discover_tv_shows",35)
         comedyView: AutoFitView = AutoFitView()
         comedyView.setWrapping(False)
         comedyView.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
@@ -45,7 +45,7 @@ class MovieScreen(QFrame):
         #popularView.setMinimumIconSize(140,int(140 * 1.5))
         comedyRow: Row = Row("comedy", comedyView)
 
-        tmdbmodel3 = TMDBDiscoverListModel("discover_movies",14)
+        tmdbmodel3 = TMDBDiscoverListModel("discover_tv_shows",10767)
         fantasyView: AutoFitView = AutoFitView()
         fantasyView.setWrapping(False)
         fantasyView.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
@@ -54,32 +54,33 @@ class MovieScreen(QFrame):
         #popularView.setMinimumIconSize(140,int(140 * 1.5))
         fantasyRow = Row("Fantasy",fantasyView)
 
-        tmdbmodel4 = TMDBDiscoverListModel("discover_movies",12)
-        adventureView: AutoFitView = AutoFitView()
-        adventureView.setWrapping(False)
-        adventureView.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
-        adventureView.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
-        adventureView.setModel(tmdbmodel4)
+        tmdbmodel4 = TMDBDiscoverListModel("discover_tv_shows",18)
+        dramaView: AutoFitView = AutoFitView()
+        dramaView.setWrapping(False)
+        dramaView.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        dramaView.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        dramaView.setModel(tmdbmodel4)
         #popularView.setMinimumIconSize(140,int(140 * 1.5))
-        adventureRow= Row("Adventure",adventureView)
+        dramaRow= Row("Drama",dramaView)
 
 
-        tmdbmodel5 = TMDBDiscoverListModel("discover_movies",27)
-        horrorview: AutoFitView = AutoFitView()
-        horrorview.setWrapping(False)
-        horrorview.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
-        horrorview.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
-        horrorview.setModel(tmdbmodel5)
+        tmdbmodel5 = TMDBDiscoverListModel("discover_tv_shows",27)
+        realityView: AutoFitView = AutoFitView()
+        realityView.setWrapping(False)
+        realityView.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        realityView.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        realityView.setModel(tmdbmodel5)
         #popularView.setMinimumIconSize(140,int(140 * 1.5))
-        horrorRow= Row("Horror",horrorview)
+        realityRow= Row("Reality",realityView)
+        
 
-        scrollFrameLayout = QVBoxLayout(scrollFrame)
-        scrollFrameLayout.addWidget(banner)
-        #movieLayout.addWidget(actionRow)
-        scrollFrameLayout.addWidget(comedyRow)
-        #movieLayout.addWidget(fantasyRow)
-        scrollFrameLayout.addWidget(adventureRow)
-        scrollFrameLayout.addWidget(horrorRow)
+        scrollAreaFrameLayout = QVBoxLayout(scrollFrame)
+        scrollAreaFrameLayout.addWidget(banner)
+        scrollAreaFrameLayout.addWidget(actionRow)
+        scrollAreaFrameLayout.addWidget(comedyRow)
+        scrollAreaFrameLayout.addWidget(fantasyRow)
+        scrollAreaFrameLayout.addWidget(dramaRow)
+        #scrollAreaFrameLayout.addWidget(realityRow)
 
         mainframeLayout = QVBoxLayout(self)
         mainframeLayout.addWidget(scrollArea)

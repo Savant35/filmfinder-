@@ -9,16 +9,16 @@ from PyQt6.QtNetwork import QNetworkAccessManager, QNetworkReply, QNetworkReques
 
 class TMDBTVListModel(QAbstractListModel):
 
-    def __init__(self,category = "popular", parent=None,):
+    def __init__(self,endpoint : str, parent=None,):
         super().__init__(parent)
         self.placeHolderPixmap: QPixmap = QPixmap(600,int(600 * 1.5))
         self.placeHolderPixmap.fill(QColor("#7c859E"))
         self.baseImageUrl = "https://www.themoviedb.org/t/p/w185"
-        self.category = category
         #self.placeHolderPixmap: QPixmap = QPixmap("film_finder/tmdb/assets/queengambitposter.jpg")
         self.media: List[AsObj] = []
         self.tv = TV()
         self.networkmanager = QNetworkAccessManager()
+        self.endpoint = endpoint
 
     def rowCount(self, parent=QModelIndex()) -> int:
         return len(self.media)
@@ -87,19 +87,18 @@ class TMDBTVListModel(QAbstractListModel):
         currentPage = 0
         if len(self.media ) > 0:
             currentPage = int(self.tv.page)
-        if self.category == "popular":
-            response = self.tv.popular(currentPage + 1)
-            first = self.rowCount()
-            last  = first
-            if isinstance(response,list):
-                last = len(response) -1 + first
-                self.beginInsertRows(parent,first,last)
-                self.media.extend(response)
-                self.endInsertRows()
-            else:
-                self.beginInsertRows(parent,first,last)
-                self.media.append(response)
-                self.endInsertRows()
+        response = getattr(self.tv, self.endpoint)(currentPage + 1)
+        first = self.rowCount()
+        last  = first
+        if isinstance(response,list):
+            last = len(response) -1 + first
+            self.beginInsertRows(parent,first,last)
+            self.media.extend(response)
+            self.endInsertRows()
+        else:
+            self.beginInsertRows(parent,first,last)
+            self.media.append(response)
+            self.endInsertRows()
 
     def clear(self):
         self.beginResetModel()

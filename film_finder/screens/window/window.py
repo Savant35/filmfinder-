@@ -1,5 +1,6 @@
 from typing import Optional
 from PyQt6.QtWidgets import  QAbstractButton, QFrame, QGridLayout,  QMainWindow, QStackedWidget, QWidget
+from film_finder.screens.tvshows.tvscreen import TVScreen
 from film_finder.widgets import Header
 from film_finder.widgets import Sidebar
 from ..home import HomeScreen
@@ -13,6 +14,7 @@ class Window(QMainWindow):
         header: Header = Header()
         home: HomeScreen = HomeScreen()
         movie = MovieScreen()
+        tv = TVScreen()
 
         self.mainStackWidget: QStackedWidget = QStackedWidget()
         windowFrame: QFrame = QFrame()
@@ -23,10 +25,11 @@ class Window(QMainWindow):
         windowFrameLayout: QGridLayout = QGridLayout(windowFrame)
         windowFrameLayout.addWidget(header,0,0,1,1)
         windowFrameLayout.addWidget(self.mainStackWidget,1,0,1,1)
-        windowFrameLayout.setSpacing(30)
+        #windowFrameLayout.setSpacing(30)
 
         self.mainStackWidget.addWidget(home)
         self.mainStackWidget.addWidget(movie)
+        self.mainStackWidget.addWidget(tv)
         self.mainStackWidget.setCurrentIndex(0)
 
 
@@ -40,6 +43,8 @@ class Window(QMainWindow):
             self.mainStackWidget.setCurrentIndex(0)
         elif button.text().lower() == "movies":
             self.mainStackWidget.setCurrentIndex(1)
+        else:
+            self.mainStackWidget.setCurrentIndex(2)
         
     def loadHome(self):
         self.mainStackWidget.setCurrentIndex(0)
