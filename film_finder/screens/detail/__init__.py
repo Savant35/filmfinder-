@@ -1,0 +1,1 @@
+from .detailscreen import DetailScreen

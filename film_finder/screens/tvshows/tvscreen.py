@@ -1,10 +1,8 @@
 from typing import Optional
 from PyQt6 import QtWidgets
-from PyQt6.QtCore import QSize, Qt
+from PyQt6.QtCore import QModelIndex, QSize, Qt, pyqtSignal
 from PyQt6.QtWidgets import  QFrame, QGridLayout, QScrollArea, QSizePolicy, QVBoxLayout, QWidget
-from film_finder import tmdb
 from film_finder.tmdb import TMDBDiscoverListModel
-from film_finder.widgets import row
 from film_finder.widgets.autofitview.autofitview import AutoFitView
 from film_finder.widgets.banner.banner import Banner
 from film_finder.widgets.row.row import Row
@@ -12,6 +10,7 @@ from film_finder.widgets.row.row import Row
 
 
 class TVScreen(QFrame): 
+    filmClicked: pyqtSignal = pyqtSignal(QModelIndex)
     def __init__(self,parent: Optional [QWidget] = None):
         super().__init__(parent=parent)
 
@@ -24,6 +23,8 @@ class TVScreen(QFrame):
         scrollArea.setWidget(scrollFrame)
         scrollArea.setWidgetResizable(True)
         scrollFrame.setObjectName("scrollFrame")
+        scrollArea.horizontalScrollBar().setDisabled(True)
+        scrollArea.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff) 
 
     
         
@@ -81,6 +82,12 @@ class TVScreen(QFrame):
         realityView.setModel(tmdbmodel5)
         #popularView.setMinimumIconSize(140,int(140 * 1.5))
         realityRow= Row("Reality",realityView)
+
+        actionView.clicked.connect(self.filmClicked)
+        comedyView.clicked.connect(self.filmClicked)
+        animationView.clicked.connect(self.filmClicked)
+        fantasyView.clicked.connect(self.filmClicked)
+        dramaView.clicked.connect(self.filmClicked)
         
 
         scrollAreaFrameLayout = QVBoxLayout(scrollFrame)

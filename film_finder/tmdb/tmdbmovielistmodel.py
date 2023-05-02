@@ -13,7 +13,6 @@ class TMDBMovieListModel(QAbstractListModel):
         self.placeHolderPixmap: QPixmap = QPixmap(600,int(600 * 1.5))
         self.placeHolderPixmap.fill(QColor("#7c859E"))
         self.baseImageUrl = "https://www.themoviedb.org/t/p/w185"
-        #self.placeHolderPixmap: QPixmap = QPixmap("film_finder/tmdb/assets/queengambitposter.jpg")
         self.media: List[AsObj] = []
         self.movie = Movie()
         self.networkmanager = QNetworkAccessManager()
@@ -30,7 +29,18 @@ class TMDBMovieListModel(QAbstractListModel):
         if row < 0 or row >= self.rowCount():
             return None
         if role == Qt.ItemDataRole.DisplayRole:
-            return self.media[row].get("title")
+            if column == 0:
+                if hasattr(self.media[row],"name"):
+                    return self.media[row].get("name")
+                else:
+                    return self.media[row].get("title")
+            elif column == 1:
+                return self.media[row].get("vote_average")
+            elif column == 2:
+                return self.media[row].get("overview")
+
+            elif column == 3:
+                return self.media[row].get("backdrop_path")
         if role == Qt.ItemDataRole.DecorationRole:
             media = self.media[row]
             if hasattr(media,"poster_pixmap"):
@@ -52,6 +62,11 @@ class TMDBMovieListModel(QAbstractListModel):
         if  row < 0 or row >= len(self.media):
             return QModelIndex()
         return self.createIndex(row, column)
+
+    def sibling(self, row: int, column: int, idx: QModelIndex) -> QModelIndex:
+        if row == idx.row():
+            return self.index(row,column)
+        return QModelIndex()
 
     def canFetchMore(self, parent: QModelIndex) -> bool:
         #return False

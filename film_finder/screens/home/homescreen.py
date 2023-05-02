@@ -1,13 +1,13 @@
 
 from typing import Optional
-from PyQt6.QtCore import QAbstractListModel, Qt
+from PyQt6.QtCore import QAbstractListModel, QModelIndex, Qt, pyqtSignal
 from PyQt6.QtWidgets import QFrame, QScrollArea,  QVBoxLayout, QWidget,QGridLayout
-from film_finder.widgets import Banner, AutoFitView, Row, sidebar
-#from film_finder.tmdb import TMDBListModel
+from film_finder.widgets import Banner, AutoFitView, Row
 from film_finder.tmdb import TMDBTVListModel
 from film_finder.widgets.sidebar.sidebar import Sidebar
 
 class HomeScreen(QFrame):
+    filmClicked: pyqtSignal = pyqtSignal(QModelIndex)
     
     def __init__(self,parent: Optional[QWidget] = None):
         super().__init__(parent=parent)
@@ -20,6 +20,8 @@ class HomeScreen(QFrame):
         scrollFrame.setObjectName("scrollFrame")
         scrollArea.setWidget(scrollFrame)
         scrollArea.setWidgetResizable(True)
+        scrollArea.horizontalScrollBar().setDisabled(True)
+        scrollArea.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff) 
         
         
         tmdbModel: QAbstractListModel = TMDBTVListModel("popular")
@@ -41,6 +43,10 @@ class HomeScreen(QFrame):
         view2.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff) 
         view2.setModel(tmdbModel2)
         row2: Row = Row("Airing Today",view2)
+
+        view.clicked.connect(self.filmClicked)
+        view2.clicked.connect(self.filmClicked)
+        sidebar.filmClicked.connect(self.filmClicked)
 
         homeLayout: QGridLayout = QGridLayout(scrollFrame)
         homeLayout.addWidget(banner,0,0,1,1)

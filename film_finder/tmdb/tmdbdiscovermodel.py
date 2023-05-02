@@ -31,10 +31,19 @@ class TMDBDiscoverListModel(QAbstractListModel):
         if row < 0 or row >= self.rowCount():
             return None
         if role == Qt.ItemDataRole.DisplayRole:
-            if hasattr(self.media[row],"name"):
-                return self.media[row].get("name")
-            else:
-                return self.media[row].get("title")
+            if column == 0:
+                if hasattr(self.media[row],"name"):
+                    return self.media[row].get("name")
+                else:
+                    return self.media[row].get("title")
+            elif column == 1:
+                return self.media[row].get("vote_average")
+            elif column == 2:
+                return self.media[row].get("overview")
+
+            elif column == 3:
+                return self.media[row].get("backdrop_path")
+
         if role == Qt.ItemDataRole.DecorationRole:
             media = self.media[row]
             if hasattr(media,"poster_pixmap"):
@@ -56,6 +65,11 @@ class TMDBDiscoverListModel(QAbstractListModel):
         if  row < 0 or row >= len(self.media):
             return QModelIndex()
         return self.createIndex(row, column)
+
+    def sibling(self, row: int, column: int, idx: QModelIndex) -> QModelIndex:
+        if row == idx.row():
+            return self.index(row,column)
+        return QModelIndex()
 
     def canFetchMore(self, parent: QModelIndex) -> bool:
         #return False

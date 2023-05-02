@@ -1,14 +1,14 @@
 
 from typing import Optional
-from PyQt6.QtCore import Qt
+from PyQt6.QtCore import QModelIndex, Qt, pyqtSignal
 from PyQt6.QtWidgets import QFrame, QSizePolicy, QVBoxLayout, QWidget
 from film_finder.tmdb.tmdbmovielistmodel import TMDBMovieListModel
 from ..row import Row
 from ..autofitview import AutoFitView
-from film_finder.tmdb import TMDBListModel
-
 
 class Sidebar(QFrame):
+    filmClicked: pyqtSignal = pyqtSignal(QModelIndex)
+
     def __init__(self, parent: Optional[QWidget]= None):
         super().__init__(parent=parent)
 
@@ -40,9 +40,12 @@ class Sidebar(QFrame):
         #nowplayingView.setMinimumIconSize(140,int(140 * 1.5))
         nowplayingRow: Row = Row("Movies In Theter", nowplayingView)
 
+        popularView.clicked.connect(self.filmClicked)
+        topratedView.clicked.connect(self.filmClicked)
+        nowplayingView.clicked.connect(self.filmClicked)
+
         sidebarLayout: QVBoxLayout = QVBoxLayout(self)
         sidebarLayout.addWidget(topratedRow)
         sidebarLayout.addWidget(popularRow)
         sidebarLayout.addWidget(nowplayingRow)
         
-        #self.setSizePolicy(QSizePolicy.Policy.Expanding,QSizePolicy.Policy.Expanding)

@@ -10,6 +10,9 @@ Header QPushButton{
   color: #A8A1AF;
   font-size: 14px;
 }
+Header QPushButton:hover{
+  color:white;
+}
 
 #logoButton {
   color: red;
@@ -30,18 +33,43 @@ Banner {
   border-radius: 10px;
 }
 
-#frontFrame QLabel{
+Banner #frontFrame QLabel{
   font-size: 30px;
   color:#E0E2F2;
 }
 
-#frontFrame QPushButton{
+Banner #frontFrame QPushButton{
   font-size: 20px;
   background-color:#f13e44;
   color:#E0E2F2;
   border-radius: 4px;
 }
 
+/*detail settings                               */
+DetailScreen #titleLabel{
+  font-size: 25px;
+  color:red;
+}
+DetailScreen #overviewLabel{
+  background-color:none;
+  color: #A8A1AF;
+  font-size: 18px;
+
+}
+
+DetailScreen #trailerButton{
+  border: 1px solid;
+  background-color:red;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+DetailScreen #ratingButton{
+  background-color: none;
+  border: none;
+  text-align: left;
+  color:#E0E2F2;
+}
 /*view settings                               */
 AutoFitView{
   background-color: transparent;
@@ -68,5 +96,34 @@ Row QLabel {
 }
 QScrollArea,#scrollFrame{
   background-color:#E0E2F2;
+  border: none;
+}
+QScrollBar {
+  width: 10px;
+  margin: 0px 0px 0px 0px;
+  background: transparent;
+  color: #A8A1AF;
+}
+
+QScrollBar::add-page, QScrollBar::sub-page{
+  background-color:transparent;
+}
+
+QScrollBar::handle {
+  min-height: 50px;
+  max-height: 50px;
+  width: 10px;
+  border-bottom: 0px;
+  background-color: #A8A1AF;
+  border-radius: 2px;
+}
+
+QScrollBar::add-line:vertical{
+  background: none;
+  border: none;
+}
+
+QScrollBar::sub-line:vertical {
+  background-color: transparent;
   border: none;
 }

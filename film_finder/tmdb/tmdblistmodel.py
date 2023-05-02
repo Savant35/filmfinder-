@@ -20,6 +20,11 @@ class TMDBListModel(QAbstractListModel):
             return QModelIndex()
         return self.createIndex(row, column)
 
+    def sibling(self, row: int, column: int, idx: QModelIndex) -> QModelIndex:
+        if row == idx.row():
+            return self.index(row,column)
+        return QModelIndex()
+
     def clear(self):
         self.beginResetModel()
         self.media.clear()
