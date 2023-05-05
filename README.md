@@ -1,24 +1,21 @@
 
 <a name="readme-top"></a>
-
+<!-- PROJECT LOGO -->
+<br />
 <div align="center">
 
-  <h3 align="center">FilmFinder+</h3>
+  <h3 align="center">HAYAI</h3>
 
   <p align="center">
-   An exceptional graphical user interface (GUI) application designed to discover new movies or shows and provide comprehensive information 
-   for viewing purposes.
-
+    An exceptional graphical user interface (GUI) application designed to discover new movies or shows and provide comprehensive information for viewing purposes.
     <br />
-    <a href="#preview">View Demo</a>
+    <a href="#demo">View Demo</a>
     ·
     <a href="https://github.com/Savant35/filmfinder-/issues">Report Bug</a>
     ·
     <a href="https://github.com/Savant35/filmfinder-/pulls">Request Feature</a>
   </p>
 </div>
-
-
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
@@ -31,6 +28,7 @@
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
+        <li><a href="#preview">preview</a></li>
       </ul>
     </li>
     <li><a href="#preview">Demo</a></li>
