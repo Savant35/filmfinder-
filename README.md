@@ -4,7 +4,7 @@
 <br />
 <div align="center">
 
-  <h3 align="center">HAYAI</h3>
+  <h3 align="center">FilmFinder+</h3>
 
   <p align="center">
     An exceptional graphical user interface (GUI) application designed to discover new movies or shows and provide comprehensive information for viewing purposes.
